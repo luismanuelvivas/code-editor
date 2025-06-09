@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>code editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4f46e5',
+            primaryLight: '#818cf8',
+            primaryLighter: '#a5b4fc',
+            dark: '#1f2937',
+            light: '#f9fafb',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+  <script src="js/header.js" defer></script>
+  <script src="js/footer.js" defer></script>
+</head>
+<body class="min-h-screen bg-gray-900 dark:bg-gray-900">
+
+  <header id="header"></header>
+  
+  <main class="max-w-7xl mx-auto px-4 py-6">
+    <div class="bg-gray-800 p-6 rounded-lg shadow">
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Editor Panel -->
+        <div class="flex-1">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-medium text-light">Editor</h3>
+            <button id="run-btn" class="px-3 py-1 bg-primary text-light rounded hover:bg-primaryLight transition">
+              Run Code
+            </button>
+          </div>
+          <textarea id="editor" class="w-full h-96 p-4 border border-gray-600 rounded font-mono text-sm bg-gray-700 text-gray-100 focus:ring-2 focus:ring-primary focus:border-transparent" spellcheck="false">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Preview</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #1a1a1a; color: #f0f0f0; }
+    h1 { color: #818cf8; }
+  </style>
+</head>
+<body>
+  <h1>Hello World!</h1>
+  <p>Edit this code to see live preview.</p>
+</body>
+</html>
+          </textarea>
+        </div>
+        
+        <!-- Preview Panel -->
+        <div class="flex-1">
+          <h3 class="font-medium text-light mb-2">Preview</h3>
+          <iframe id="preview" class="w-full h-96 border border-gray-600 rounded bg-gray-800"></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer id="footer"></footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const editor = document.getElementById('editor');
+      const preview = document.getElementById('preview');
+      const runBtn = document.getElementById('run-btn');
+      
+      // Function to update preview
+      const updatePreview = () => {
+        const html = editor.value;
+        preview.srcdoc = html;
+      };
+      
+      // Initial render
+      updatePreview();
+      
+      // Update preview on button click
+      runBtn.addEventListener('click', updatePreview);
+      
+      // Optional: Update preview while typing (comment out if not needed)
+      // editor.addEventListener('input', updatePreview);
+    });
+  </script>
+</body>
+</html>
